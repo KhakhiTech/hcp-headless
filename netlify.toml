@@ -1,0 +1,13 @@
+# The repository holds two apps: a Next.js site in /frontend (deployed here)
+# and a Strapi CMS in /backend (not deployed to Netlify; reached at runtime
+# through the STRAPI_URL environment variable).
+[build]
+  # Build and deploy only the /frontend folder.
+  base = "frontend"
+  command = "npm run build"
+  publish = ".next"
+  # Skip the build when a commit doesn't touch /frontend or this file.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF . ../netlify.toml"
+
+[build.environment]
+  NODE_VERSION = "22"
